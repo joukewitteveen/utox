@@ -1,0 +1,84 @@
+utox - extracting UML from images into XMI files
+================================================
+
+
+About
+-----
+Liacs Software Engineering 2011, image-to-uml project.
+This one is in C++. It is fast, above-par quality and has a high quality source
+base.
+
+
+Features
+--------
+Utox is not feature complete. Class diagrams are partially supported. No other
+diagram types are supported yet.
+
+
+Requirements
+------------
+To compile Utox, you will need OpenCV (>=2) and Tesseract (>=3). TinyXML is
+distributed with Utox.
+The source is standard C++/STL without platform-specific extensions.
+Utox bundles a UML representation and XMI export library (libuml.a) that can be
+statically compiled into other software.
+
+
+Compilation
+-----------
+The entire project can be compiled by calling `make` from the top-level source
+directory. Additionally, one can call `make DEBUG=yes` to build a version that
+demonstrates its internal workings. Calling `make clean` reverts the repository
+to a pristine state.
+
+
+Usage
+-----
+The syntax is
+$ utox [-v] -f input-file -o output-file
+where -v makes utox more verbose.
+The input-file can be any image file supported by both OpenCV and Leptonica and
+must not use an alpha layer (transparency).
+When in doubt, use ImageMagick to convert the input-file:
+`convert input-file -background white -flatten input-file-good.png`.
+The output-file will be overwritten (or created) by the XMI representation of
+the UML diagram in the image, for as far as it is recognized by Utox.
+
+
+Shortcomings
+------------
+Part of the achievement of Utox is it's organized code-base. Although not all
+functions are commented with pre-conditions and post-conditions, the code has a
+consistent indentation style and contains comments where they are relevant.
+The directory structure is extendible and modular, as is the code.
+What Utox does not do is make coffee. The shortcomings in the code are marked
+"TODO" and consist mainly of features that are not yet implemented. Whenever
+possible, markers are given on the work that needs to be done.
+
+
+License (modified BSD)
+----------------------
+Copyright (c) 2011, Jouke Witteveen, Mathijs van de Nes and contributors
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the <organization> nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
