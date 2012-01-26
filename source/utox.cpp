@@ -38,19 +38,19 @@ int main( int argc, char *argv[] ){
   while( ( opt = getopt( argc, argv, "f:o:vh" ) ) != -1 ){
     switch( opt ){
       case 'f':  // Input file.
-        // What if already specified? Currently: use latest.
+        // TODO: What if already specified? Currently: use latest.
         inFile = optarg;
-        // Do some checks (existence)?
+        // TODO: Do some checks (existence)?
         break;
       case 'o':  // Output file.
-        // What if already specified? Currently: use latest.
+        // TODO: What if already specified? Currently: use latest.
         outFile = optarg;
-        // Do some checks?
+        // TODO: Do some checks?
         break;
-      // Note: getopt yields '?' on missing arguments so don't use it for help.
       case 'v':  // Verbose.
         loggingVerbose = true;
         break;
+      // Note: getopt yields '?' on missing arguments so don't use it for help.
       case 'h':  // Help.
         usage();
         return 0;
