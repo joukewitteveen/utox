@@ -10,12 +10,12 @@
 #include <iostream>
 #include "logic.hpp"
 #include "logging.hpp"
+#include "convert.hpp"
+#include "scan.hpp"
 
 using namespace std;
 
-
 bool loggingVerbose;
-
 
 void usage(){
   cout << "Usage: utox [-v] -f input-file -o output-file" << endl
@@ -35,7 +35,7 @@ int main( int argc, char *argv[] ){
              optopt;
 
   // More options to come! (Type of UML diagram)
-  while( ( opt = getopt( argc, argv, "f:o:vh" ) ) != -1 ){
+  while( ( opt = getopt( argc, argv, "f:o:vhsc" ) ) != -1 ){
     switch( opt ){
       case 'f':  // Input file.
         // TODO: What if already specified? Currently: use latest.
@@ -54,6 +54,12 @@ int main( int argc, char *argv[] ){
       case 'h':  // Help.
         usage();
         return 0;
+      case 'c':  // Convert the image 
+				convert( inFile );
+			case 's': // Use the scanner and convert the image
+				scan( inFile );
+				convert( inFile );
+	break;
       default:
         cerr << "Ouch, what just happend? (" << (char) optopt << ")" << endl;
         //return 1  // Fatal.
@@ -69,7 +75,7 @@ int main( int argc, char *argv[] ){
     return 1;
   } //if
 
-  uml_t* uml = extractUml( inFile, umlType );
+  //uml_t* uml = extractUml( inFile, umlType );
   //TODO: Check result
   writeLog( "Writing XMI to \"" );
   writeLog( outFile );
