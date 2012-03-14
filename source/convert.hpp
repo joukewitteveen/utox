@@ -12,6 +12,6 @@
 
 #include <iostream>
 
-void convert( char* &inFile );
+bool convert( char* &inFile, char* &convertFile, const bool &overwrite );
 
 #endif //CONVERT_HPP

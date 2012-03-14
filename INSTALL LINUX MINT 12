@@ -1,0 +1,154 @@
+Utox @ Lisa Mint 12
+Met OpenCV 2.3.1, Leptonica 1.68 en Tesseract 3.01.
+
+__________________
+OpenCV2.3.1
+
+sudo apt-get remove ffmpeg x264 libx264-dev
+
+sudo apt-get update
+sudo apt-get install build-essential checkinstall git cmake libfaac-dev libjack-jackd2-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libva-dev libvdpau-dev libvorbis-dev libx11-dev libxfixes-dev libxvidcore-dev texi2html yasm zlib1g-dev
+
+wget ftp://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20110808-2245-stable.tar.bz2
+
+tar xvf x264-snapshot-20110808-2245-stable.tar.bz2
+
+cd x264-snapshot-20110808-2245-stable
+
+./configure --enable-static --enable-shared
+
+make
+
+sudo make install
+
+cd ../
+
+wget http://ffmpeg.org/releases/ffmpeg-0.8.10.tar.bz2
+
+tar xvf ffmpeg-0.8.10.tar.bz2
+
+cd ffmpeg-0.8.10
+
+./configure --enable-gpl --enable-libfaac --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-nonfree --enable-postproc --enable-version3 --enable-x11grab --enable-shared
+
+make
+
+sudo make install
+
+sudo apt-get install libgtk2.0-0 libgtk2.0-dev
+
+sudo apt-get install libjpeg62 libjpeg62-dev
+
+cd ../
+
+wget http://www.linuxtv.org/downloads/v4l-utils/v4l-utils-0.8.5.tar.bz2
+
+tar xvf v4l-utils/v4l-utils-0.8.5
+
+cd v4l-utils-0.8.5
+
+make
+
+sudo make install
+
+cd ../
+
+Download OpenCV-2.3.1a.tar.bz2 @ http://sourceforge.net/projects/opencvlibrary/files/
+Sla de tar.bz2 op in ~
+
+tar xvf OpenCV-2.3.1.tar.bz2
+
+cd OpenCV-2.3.1/
+
+mkdir build
+
+cd build
+
+cmake ..
+
+make
+
+sudo make install
+
+sudo gedit /etc/ld.so.conf.d/opencv.conf
+en voeg aan het eind toe 
+/usr/local/lib
+Natuurlijk opslaan en gedit afsluiten.
+
+sudo ldconfig /etc/ld.so.conf
+
+sudo gedit /etc/bash.bashrc
+en voeg aan het eind toe 
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+export PKG_CONFIG_PATH
+Natuurlijk opslaan en gedit afsluiten.
+
+cd ../../
+
+__________________
+Leptonica 1.68
+
+wget http://www.leptonica.com/source/leptonica-1.68.tar.gz
+
+tar xvf leptonica-1.68.tar.gz
+
+cd leptonica-1.68
+
+./configure
+
+make
+
+sudo make install
+
+cd ../
+__________________
+Tesseract 3.01
+
+wget http://tesseract-ocr.googlecode.com/files/tesseract-3.01.tar.gz
+
+tar xvf tesseract-3.01.tar.gz
+
+cd tesseract-3.01
+
+./autogen.sh
+
+./configure
+
+make
+
+sudo make install
+
+sudo ldconfig
+
+wget http://tesseract-ocr.googlecode.com/files/eng.traineddata.gz
+
+gzip -d eng.traineddata.gz
+
+sudo mv eng.traineddata /usr/local/share/tessdata/
+
+cd ../
+__________________
+Utox
+
+Maakt een account op github, installeer het, stel het in, fork joukewitteveen/utox, clone je eigen fork naar ~.
+
+cd utox
+
+make
+
+of
+
+make DEBUG=yes
+
+cd source
+
+./utox -V -o inputfile.png -f outputfile.xmi
+
+______________________
+Sources
+http://ozbots.org/opencv-installation/
+http://www.leptonica.com/source/README.html
+http://code.google.com/p/tesseract-ocr/wiki/ReadMe#Linux
+
+
+

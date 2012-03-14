@@ -12,6 +12,6 @@
 
 #include <iostream>
 
-void scan( char* &inFile );
+bool scan( char* &scanFile, const bool &overwrite );
 
 #endif //SCAN_HPP
