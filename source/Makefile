@@ -14,7 +14,7 @@ CXXFLAGS += -Wall -DDEBUG
 endif
 
 
-utox: detector.o reader.o logic.o logic/common.o logic/class.o
+utox: detector.o reader.o logic.o logic/common.o logic/class.o convert.o scan.o
 
 .PHONY: clean
 clean:

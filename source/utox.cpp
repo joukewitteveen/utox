@@ -10,24 +10,33 @@
 #include <iostream>
 #include "logic.hpp"
 #include "logging.hpp"
+#include "convert.hpp"
+#include "scan.hpp"
 
 using namespace std;
 
-
 bool loggingVerbose;
-
+bool overwrite = false;
 
 void usage(){
-  cout << "Usage: utox [-v] -f input-file -o output-file" << endl
+  cout << "Usage: utox [-v] [-w] [-f input-file] -o output-file [-c convertFile] [-a scanFile]" << endl
        << "Detect the UML structure depicted in input-file and write it to" << endl
        << "output-file in XMI representation." << endl << endl
-       << "  -v\tincrease verbosity" << endl;
+       << "  -v\tincrease verbosity" << endl
+			 << "  -w\toverwrite image if already exists" << endl
+			 << "  -f\tconvert input-file to output-file" << endl
+			 << "  -c\tconvert input-file to convert-file" << endl
+			 << "  -a\tscan image and save as save-File" << endl
+			 << " Example for scanning 'utox -a scanfile.tiff -c convertfile.png -o outfile.xmi'" << endl;
 } //usage
 
 
 int main( int argc, char *argv[] ){
   char* inFile = NULL,
-      * outFile = NULL;
+      * outFile = NULL,
+			* scanFile = NULL,
+			* convertFile = NULL;
+			
   int opt;
   uml_type umlType = Class;  // Default for now.
   extern char* optarg;
@@ -35,7 +44,7 @@ int main( int argc, char *argv[] ){
              optopt;
 
   // More options to come! (Type of UML diagram)
-  while( ( opt = getopt( argc, argv, "f:o:vh" ) ) != -1 ){
+  while( ( opt = getopt( argc, argv, "f:o:vha:c:w" ) ) != -1 ){
     switch( opt ){
       case 'f':  // Input file.
         // TODO: What if already specified? Currently: use latest.
@@ -54,6 +63,26 @@ int main( int argc, char *argv[] ){
       case 'h':  // Help.
         usage();
         return 0;
+      case 'c':  // Convert the image 
+				convertFile = optarg;
+				if( !convert( inFile, convertFile, overwrite ) ){ // No input-file
+					return 1;
+				} //if
+				inFile = convertFile;
+				break;
+			case 'a': // Use the scanner and convert the image
+				scanFile = optarg;
+				if( scan( scanFile, overwrite ) ){
+					// convert( scanFile, convertFile, overwrite );
+					// inFile = convertFile;
+					inFile = scanFile;
+				} else{ // No scan device
+					return 1;
+				} //if
+				break;
+			case 'w': // force overwrite
+				overwrite = true;
+				break;
       default:
         cerr << "Ouch, what just happend? (" << (char) optopt << ")" << endl;
         //return 1  // Fatal.
