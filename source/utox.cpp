@@ -23,10 +23,11 @@ void usage(){
        << "Detect the UML structure depicted in input-file and write it to" << endl
        << "output-file in XMI representation." << endl << endl
        << "  -v\tincrease verbosity" << endl
-			 << "  -w\toverwrite image if already exists\n" << endl
+			 << "  -w\toverwrite image if already exists" << endl
 			 << "  -f\tconvert input-file to output-file" << endl
-			 << "  -c\tconvert input-file to convert-file (without extension)" << endl
-			 << "  -a\tscan image and save as save-File (without extension)" << endl;
+			 << "  -c\tconvert input-file to convert-file" << endl
+			 << "  -a\tscan image and save as save-File" << endl
+			 << " Example for scanning 'utox -a scanfile.tiff -c convertfile.png -o outfile.xmi'" << endl;
 } //usage
 
 
