@@ -7,6 +7,7 @@
  * See README for more details.
  */
 
+#include <unistd.h>
 #include <iostream>
 #include "logic.hpp"
 #include "logging.hpp"
